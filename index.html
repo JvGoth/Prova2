@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Interativo de Imunológia</title>
+    <title>Quiz Interativo de Imunologia</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -103,11 +103,11 @@
     </style>
 </head>
 <body>
-    <h1>Quiz Interativo de Bioquímica</h1>
-    <p style="text-align: center;">Este site contém questões interativas sobre vários tópicos de bioquímica. Selecione as respostas e clique em "Verificar" para ver os resultados. Inclui questões de múltipla escolha (nível faculdade+) e 10 abertas.</p>
+    <h1>Quiz Interativo de Imunologia</h1>
+    <p style="text-align: center;">Este site contém questões interativas sobre Imunologia, baseadas nos slides fornecidos. Selecione 5 respostas por seção e clique em "Verificar". A seção final contém 20 questões abertas.</p>
 
     <div class="section" id="section1">
-        <h2>Reações Endergônicas e Exergônicas</h2>
+        <h2>Funções do SI e Imunidade Inata vs Adaptativa</h2>
         <div id="questions1"></div>
         <button class="submit-btn" onclick="checkAnswers('section1')">Verificar Respostas</button>
         <div class="feedback" id="feedback1"></div>
@@ -115,7 +115,7 @@
     </div>
 
     <div class="section" id="section2">
-        <h2>Gliconeogênese, Glicogênese e Glicólise</h2>
+        <h2>Células e Órgãos do Sistema Imune</h2>
         <div id="questions2"></div>
         <button class="submit-btn" onclick="checkAnswers('section2')">Verificar Respostas</button>
         <div class="feedback" id="feedback2"></div>
@@ -123,7 +123,7 @@
     </div>
 
     <div class="section" id="section3">
-        <h2>Introdução à Bioenergética e Respiração Celular</h2>
+        <h2>Definição, Tipos e Epítopos de Antígenos</h2>
         <div id="questions3"></div>
         <button class="submit-btn" onclick="checkAnswers('section3')">Verificar Respostas</button>
         <div class="feedback" id="feedback3"></div>
@@ -131,7 +131,7 @@
     </div>
 
     <div class="section" id="section4">
-        <h2>Lipídios</h2>
+        <h2>Antigenicidade, Imunogenicidade e Fatores</h2>
         <div id="questions4"></div>
         <button class="submit-btn" onclick="checkAnswers('section4')">Verificar Respostas</button>
         <div class="feedback" id="feedback4"></div>
@@ -139,12 +139,20 @@
     </div>
 
     <div class="section" id="section5">
-        <h2>Questões Abertas (Nível Avançado)</h2>
-        <p>Responda livremente nas caixas de texto. Verificação parcial baseada em palavras-chave.</p>
+        <h2>Anticorpos, Haptenos, Superantígenos e Mecanismos</h2>
         <div id="questions5"></div>
         <button class="submit-btn" onclick="checkAnswers('section5')">Verificar Respostas</button>
         <div class="feedback" id="feedback5"></div>
         <div class="result" id="result5" style="display: none;"></div>
+    </div>
+
+    <div class="section" id="section6">
+        <h2>Questões Abertas (Nível Avançado)</h2>
+        <p>Responda livremente nas caixas de texto. Verificação parcial baseada em palavras-chave.</p>
+        <div id="questions6"></div>
+        <button class="submit-btn" onclick="checkAnswers('section6')">Verificar Respostas</button>
+        <div class="feedback" id="feedback6"></div>
+        <div class="result" id="result6" style="display: none;"></div>
     </div>
 
     <script>
@@ -157,124 +165,125 @@
             return array;
         }
 
-        // Pools expandidos: ~25 MC por seção (nível faculdade+), todas em PT-BR
+        // Pools de Perguntas de Imunologia (Baseadas nos PDFs)
         const questionPools = {
             section1: [
-                { type: 'mc', q: "A hidrólise de ATP é uma reação altamente:", options: ["A: endergônica", "B: aeróbia", "C: volátil", "D: exergônica"], correct: "D" },
-                { type: 'mc', q: "As reações metabólicas podem ser classificadas em dois processos metabólicos. O processo no qual as reações levam à síntese de biomoléculas é denominado:", options: ["A: metabolismo oxidativo", "B: oxidação", "C: catabolismo", "D: anabolismo"], correct: "D" },
-                { type: 'mc', q: "Que nome recebe a molécula considerada como a moeda energética dos seres vivos?", options: ["A: ADP.", "B: ATP.", "C: DNA.", "D: RNA.", "E: AMP."], correct: "B" },
-                { type: 'mc', q: "A energia livre de Gibbs, ΔG, é negativa para:", options: ["A: processos exergônicos", "B: processos endergônicos", "C: estados de equilíbrio", "D: estados ativados"], correct: "A" },
-                { type: 'mc', q: "Qual das seguintes é falsa sobre reações endergônicas e exergônicas?", options: ["A: Endergônicas têm ΔG positivo", "B: Exergônicas são espontâneas", "C: Enzimas alteram ΔG", "D: Acoplamento torna endergônicas viáveis"], correct: "C" },
-                { type: 'mc', q: "Uma reação com ΔG = -686 kcal/mol é:", options: ["A: endergônica", "B: exergônica", "C: em equilíbrio", "D: não espontânea"], correct: "B" },
-                { type: 'mc', q: "Reações exergônicas liberam:", options: ["A: energia", "B: apenas calor", "C: nada", "D: entropia"], correct: "A" },
-                { type: 'mc', q: "Reações endergônicas requerem:", options: ["A: entrada de energia", "B: saída de energia", "C: nenhuma mudança", "D: apenas catalisador"], correct: "A" },
-                { type: 'mc', q: "Nas células, processos endergônicos são impulsionados por:", options: ["A: hidrólise de ATP", "B: absorção de luz", "C: ambas A e B", "D: nenhuma"], correct: "C" },
-                { type: 'mc', q: "Reações espontâneas têm ΔG:", options: ["A: negativo", "B: positivo", "C: zero", "D: indefinido"], correct: "A" },
-                { type: 'mc', q: "Enzimas reduzem:", options: ["A: energia de ativação", "B: ΔG", "C: entropia", "D: entalpia"], correct: "A" },
-                { type: 'mc', q: "Reações acopladas tornam ΔG geral:", options: ["A: negativo", "B: positivo", "C: zero", "D: variável"], correct: "A" },
-                { type: 'mc', q: "A fixação de CO2 na fotossíntese é:", options: ["A: endergônica", "B: exergônica", "C: neutra", "D: explosiva"], correct: "A" },
-                { type: 'mc', q: "O ΔG da hidrólise de ATP é aproximadamente:", options: ["A: -7,3 kcal/mol", "B: +7,3 kcal/mol", "C: 0", "D: +30 kcal/mol"], correct: "A" },
-                { type: 'mc', q: "Em termodinâmica bioquímica, o acoplamento redox na cadeia de transporte de elétrons gera:", options: ["A: gradiente protônico para ATP sintase", "B: ΔG positivo direto", "C: entropia negativa total", "D: equilíbrio sem fluxo"], correct: "A" },
-                { type: 'mc', q: "Uma reação com ΔH negativo e ΔS positivo é sempre:", options: ["A: exergônica", "B: endergônica", "C: em equilíbrio", "D: dependente de temperatura"], correct: "A" },
-                { type: 'mc', q: "O papel das enzimas em reações endergônicas é:", options: ["A: reduzir Ea, facilitando acoplamento", "B: alterar ΔG", "C: aumentar entropia", "D: bloquear espontaneidade"], correct: "A" },
-                { type: 'mc', q: "Em sistemas abertos celulares, o ΔG efetivo difere do padrão porque:", options: ["A: concentrações não são 1M", "B: temperatura é 0K", "C: pH é neutro sempre", "D: enzimas ignoram isso"], correct: "A" },
-                { type: 'mc', q: "A síntese de proteínas no ribossomo é endergônica devido a:", options: ["A: ligações peptídicas requerendo GTP/ATP", "B: hidrólise espontânea", "C: baixa entropia de aminoácidos", "D: ausência de chaperonas"], correct: "A" },
-                { type: 'mc', q: "O conceito de 'equilíbrio de Nash' em vias metabólicas acopladas refere-se a:", options: ["A: otimização energética via regulação alostérica", "B: combustão total", "C: isolamento termodinâmico", "D: reversibilidade total"], correct: "A" },
-                { type: 'mc', q: "Em fotossíntese, o transporte de elétrons não cíclico acopla:", options: ["A: produção de ATP e NADPH para fixação endergônica", "B: apenas O2 sem energia", "C: ΔG zero", "D: exergônico isolado"], correct: "A" },
-                { type: 'mc', q: "A constante de equilíbrio K_eq relaciona-se com ΔG° por:", options: ["A: ΔG° = -RT ln K_eq", "B: ΔG° = RT K_eq", "C: independência total", "D: apenas entalpia"], correct: "A" },
-                { type: 'mc', q: "Reações com ΔG próximo a zero são sensíveis a:", options: ["A: pequenas mudanças de concentração", "B: temperatura extrema", "C: ausência de solvente", "D: catalisadores inorgânicos"], correct: "A" },
+                { type: 'mc', q: "Qual das seguintes NÃO é uma função principal do Sistema Imune listada nos slides?", options: ["A: Resistência às infecções [cite: 251]", "B: Tolerância ao próprio [cite: 252]", "C: Controle de Tumores [cite: 266]", "D: Digestão de nutrientes"], correct: "D" },
+                { type: 'mc', q: "A imunidade inata é caracterizada por ser:", options: ["A: Específica e com memória [cite: 300, 332]", "B: Constitutiva, imediata e rápida [cite: 326]", "C: Lenta e dependente de expansão clonal [cite: 227]", "D: Mediada apenas por anticorpos [cite: 339, 342]"], correct: "B" },
+                { type: 'mc', q: "A resposta imune adaptativa possui quais propriedades principais?", options: ["A: Especificidade e memória [cite: 332, 333, 335]", "B: Apenas inflamação e defesa antiviral [cite: 331]", "C: Ausência de diversidade (amplo espectro) [cite: 333]", "D: É sempre imediata e rápida [cite: 313]"], correct: "A" },
+                { type: 'mc', q: "A imunidade humoral é mediada principalmente por:", options: ["A: Linfócitos T em cooperação [cite: 338, 340]", "B: Linfócitos B e Anticorpos [cite: 339, 341, 342]", "C: Fagócitos inatos [cite: 304]", "D: Barreiras epiteliais [cite: 301]"], correct: "B" },
+                { type: 'mc', q: "Receber anticorpos da mãe durante a gestação e lactação é um exemplo de:", options: ["A: Imunidade ativa natural [cite: 358]", "B: Imunidade ativa artificial [cite: 359]", "C: Imunidade passiva natural [cite: 361]", "D: Imunidade passiva artificial [cite: 362]"], correct: "C" },
+                { type: 'mc', q: "A vacinação (imunização) é um exemplo de:", options: ["A: Imunidade passiva artificial [cite: 362]", "B: Imunidade ativa artificial [cite: 359]", "C: Imunidade ativa natural [cite: 358]", "D: Imunidade inata [cite: 299]"], correct: "B" },
+                { type: 'mc', q: "A resposta imune celular é mediada por:", options: ["A: Linfócitos T em cooperação com outras células [cite: 338, 340]", "B: Apenas anticorpos [cite: 339]", "C: Sistema complemento [cite: 311]", "D: Basófilos e Mastócitos [cite: 308]"], correct: "A" },
+                { type: 'mc', q: "Qual a principal diferença entre a resposta primária e secundária?", options: ["A: A secundária é mais lenta e fraca", "B: A primária usa células inatas, a secundária não", "C: A secundária é mais rápida e intensa devido à memória [cite: 335, 347]", "D: A primária não produz anticorpos"], correct: "C" },
+                { type: 'mc', q: "Fatores como idade, estresse e nutrição podem influenciar:", options: ["A: A resposta imune à vacinação [cite: 272, 273, 280, 284]", "B: Apenas a imunidade inata [cite: 272]", "C: Apenas a cor das células", "D: Somente a imunidade passiva [cite: 360]"], correct: "A" },
+                { type: 'mc', q: "As principais reações protetoras da imunidade inata são:", options: ["A: Memória e especificidade [cite: 333, 335]", "B: Inflamação e Defesa antiviral [cite: 331]", "C: Apenas expansão clonal [cite: 227]", "D: Produção de IgA e IgG [cite: 187]"], correct: "B" }
             ],
             section2: [
-                { type: 'mc', q: "A glicólise é a via metabólica que transforma glicose em:", options: ["A: lactato", "B: piruvato", "C: acetil-CoA", "D: oxaloacetato"], correct: "B" },
-                { type: 'mc', q: "A enzima-chave e principal ponto de regulação alostérica na glicólise é a:", options: ["A: Hexoquinase", "B: Glicose-6-fosfatase", "C: Fosfofrutoquinase-1 (PFK-1)", "D: Piruvato quinase"], correct: "C" },
-                { type: 'mc', q: "A Gliconeogênese (GNG) ocorre primariamente no:", options: ["A: músculo", "B: cérebro", "C: fígado", "D: hemácias"], correct: "C" },
-                { type: 'mc', q: "O substrato de entrada não-carboidrato mais comum para a Gliconeogênese é:", options: ["A: acetil-CoA", "B: aminoácidos", "C: lactato", "D: ácidos graxos"], correct: "C" },
-                { type: 'mc', q: "Qual enzima é única na Gliconeogênese e não está na Glicólise?", options: ["A: Enolase", "B: Piruvato Carboxilase", "C: Gliceraldeído-3-fosfato Desidrogenase", "D: Aldolase"], correct: "B" },
-                { type: 'mc', q: "A Glicogênese é estimulada por qual hormônio?", options: ["A: Glucagon", "B: Insulina", "C: Cortisol", "D: Adrenalina"], correct: "B" },
-                { type: 'mc', q: "O glicogênio é armazenado principalmente no:", options: ["A: pâncreas e baço", "B: rins e pele", "C: fígado e músculo", "D: ossos e plasma"], correct: "C" },
-                { type: 'mc', q: "Na glicólise aeróbia, o produto líquido de ATP por glicose é:", options: ["A: 1", "B: 2", "C: 8", "D: 32"], correct: "B" },
-                { type: 'mc', q: "A etapa de bypass da PFK-1 na Gliconeogênese é mediada por:", options: ["A: Frutose-1,6-bisfosfatase", "B: Glicose-6-fosfatase", "C: Fosfoenolpiruvato Carboxiquinase", "D: Piruvato Desidrogenase"], correct: "A" },
-                { type: 'mc', q: "Qual coenzima é crucial para a Piruvato Desidrogenase (PDH)?", options: ["A: Vitamina C", "B: Niacina (NAD)", "C: Tiamina (B1)", "D: Piridoxina (B6)"], correct: "C" },
-                { type: 'mc', q: "O ciclo de Cori descreve a reciclagem de:", options: ["A: glicose em lactato", "B: lactato em glicose", "C: glicose em ácidos graxos", "D: aminoácidos em glicose"], correct: "B" },
-                { type: 'mc', q: "A regulação da Glicogênio Sintase é feita primariamente por:", options: ["A: fosforilação/desfosforilação", "B: clivagem proteolítica", "C: oxidação", "D: ligação a DNA"], correct: "A" },
-                { type: 'mc', q: "O ativador alostérico mais potente da PFK-1 é:", options: ["A: ATP", "B: Citrato", "C: Frutose-2,6-bisfosfato", "D: Glicose-6-fosfato"], correct: "C" },
+                { type: 'mc', q: "Qual célula é considerada a principal APC (Célula Apresentadora de Antígenos)?", options: ["A: Célula dendrítica [cite: 407]", "B: Neutrófilo [cite: 408]", "C: Eritrócito", "D: Plaquetas"], correct: "A" },
+                { type: 'mc', q: "Linfócitos T CD4+ são também conhecidos como:", options: ["A: Helpers/Auxiliares [cite: 351, 398]", "B: Citotóxicos/Citolíticos [cite: 351, 398]", "C: Reguladores [cite: 351, 398]", "D: Natural Killers (NK) [cite: 403]"], correct: "A" },
+                { type: 'mc', q: "Quais são os órgãos linfoides primários (centrais) onde os linfócitos maduram?", options: ["A: Linfonodos e Baço [cite: 413]", "B: Medula óssea e Timo [cite: 413]", "C: Fígado e Rins", "D: MALT e GALT [cite: 413, 446]"], correct: "B" },
+                { type: 'mc', q: "O Baço é um órgão secundário que filtra antígenos primariamente da:", options: ["A: Circulação sanguínea [cite: 436]", "B: Circulação linfática [cite: 431]", "C: Mucosa intestinal [cite: 446]", "D: Pele [cite: 446]"], correct: "A" },
+                { type: 'mc', q: "Linfócitos NK (Natural Killer) são mediadores da imunidade:", options: ["A: Inata, contra vírus e tumores [cite: 403]", "B: Adaptativa humoral [cite: 339]", "C: Adaptativa celular [cite: 338]", "D: Passiva artificial [cite: 362]"], correct: "A" },
+                { type: 'mc', q: "O Timo é o sítio de maturação principal de qual célula?", options: ["A: Linfócitos B [cite: 419]", "B: Linfócitos T [cite: 413, 396]", "C: Macrófagos [cite: 378]", "D: Neutrófilos [cite: 408]"], correct: "B" },
+                { type: 'mc', q: "A Medula Óssea é o sítio de maturação principal de qual célula?", options: ["A: Linfócitos B [cite: 419, 396]", "B: Linfócitos T [cite: 413]", "C: Apenas Células T CD4+", "D: Células dendríticas maduras [cite: 389]"], correct: "A" },
+                { type: 'mc', q: "Qual granulócito está primariamente envolvido na fagocitose de bactérias?", options: ["A: Eosinófilos [cite: 408]", "B: Basófilos [cite: 408]", "C: Neutrófilos [cite: 408]", "D: Mastócitos [cite: 408]"], correct: "C" },
+                { type: 'mc', q: "Qual granulócito está envolvido na defesa contra parasitas e em alergias?", options: ["A: Eosinófilos [cite: 408]", "B: Neutrófilos [cite: 408]", "C: Monócitos [cite: 373]", "D: Linfócitos T"], correct: "A" },
+                { type: 'mc', q: "Linfonodos, Baço e MALT (Tecido Linfoide Associado à Mucosa) são classificados como:", options: ["A: Órgãos primários [cite: 413]", "B: Órgãos secundários (periféricos) [cite: 413]", "C: Barreiras epiteliais [cite: 301]", "D: Sítios de hematopoiese [cite: 416]"], correct: "B" }
             ],
             section3: [
-                { type: 'mc', q: "Qual complexo da Cadeia de Transporte de Elétrons (CTE) não bombeia prótons?", options: ["A: Complexo I", "B: Complexo II", "C: Complexo III", "D: Complexo IV"], correct: "B" },
-                { type: 'mc', q: "O aceptor final de elétrons na Respiração Celular aeróbia é:", options: ["A: CO2", "B: H2O", "C: O2", "D: NAD+"], correct: "C" },
-                { type: 'mc', q: "O Ciclo de Krebs (Ciclo do Ácido Cítrico) ocorre na:", options: ["A: membrana plasmática", "B: citosol", "C: matriz mitocondrial", "D: ribossomo"], correct: "C" },
-                { type: 'mc', q: "O rendimento líquido de ATP (aproximado) da Fosforilação Oxidativa (OXPHOS) é de cerca de:", options: ["A: 2 ATP/glicose", "B: 8 ATP/glicose", "C: 26-28 ATP/glicose", "D: 38 ATP/glicose"], correct: "C" },
-                { type: 'mc', q: "O desacoplador DNP (Dinitrofenol) causa:", options: ["A: aumento da produção de ATP", "B: redução do gradiente protônico", "C: inibição da Complexo I", "D: aumento da eficiência redox"], correct: "B" },
-                { type: 'mc', q: "O que é o 'shunt de malato-aspartato'?", options: ["A: Via de degradação de proteínas", "B: Mecanismo para transportar NADH citosólico para a mitocôndria", "C: Regulação alostérica da citrato sintase", "D: Síntese de corpos cetônicos"], correct: "B" },
-                { type: 'mc', q: "A reação da Succinato Desidrogenase (Complexo II) usa qual aceptor de elétrons?", options: ["A: NAD+", "B: FAD", "C: Tiamina", "D: Vitamina K"], correct: "B" },
-                { type: 'mc', q: "O que impulsiona a rotação do eixo da ATP Sintase (F1)?", options: ["A: Fluxo de elétrons", "B: Fluxo de prótons (H+) pelo canal F0", "C: Hidrólise de ATP", "D: Ligação de Citrato"], correct: "B" },
-                { type: 'mc', q: "O CO2 liberado no Ciclo de Krebs deriva primariamente de:", options: ["A: Oxigênio molecular", "B: Moléculas de água", "C: Acetil-CoA", "D: Bicarbonato"], correct: "C" },
-                { type: 'mc', q: "A Citocromo c Oxidase (Complexo IV) é inibida por:", options: ["A: Malonato", "B: Oligomicina", "C: Cianeto (CN-)", "D: Rotenona"], correct: "C" },
-                { type: 'mc', q: "A Fosforilação em Nível de Substrato ocorre em quais etapas da glicólise?", options: ["A: Apenas no início", "B: Hexoquinase e PFK-1", "C: Fosfoglicerato Quinase e Piruvato Quinase", "D: Apenas no ciclo de Krebs"], correct: "C" },
+                { type: 'mc', q: "De acordo com a definição nos slides, um Antígeno (Ag) é qualquer substância que pode ligar especificamente a um:", options: ["A: Anticorpo (BCR) ou Receptor de Célula T (TCR) [cite: 95, 97, 98]", "B: Apenas receptores da imunidade inata [cite: 99]", "C: Apenas ao Sistema Complemento [cite: 311]", "D: Apenas a moléculas de MHC"], correct: "A" },
+                { type: 'mc', q: "Antígenos próprios do organismo, que normalmente são tolerados, são chamados de:", options: ["A: Antígenos estranhos [cite: 88]", "B: Haptenos [cite: 162]", "C: Autoantígenos [cite: 93]", "D: Superantígenos [cite: 166]"], correct: "C" },
+                { type: 'mc', q: "A região específica no antígeno que é reconhecida pelo anticorpo ou TCR é chamada de:", options: ["A: Epítopo (ou Determinante Antigênico) [cite: 135, 137]", "B: Paratopo", "C: Imunógeno [cite: 140]", "D: Adjuvante [cite: 159]"], correct: "A" },
+                { type: 'mc', q: "Um epítopo que é perdido quando a proteína sofre desnaturação (perde a estrutura 3D) é um:", options: ["A: Determinante linear [cite: 138, 27]", "B: Determinante conformacional [cite: 138, 21, 46]", "C: Neoantígeno [cite: 138, 30]", "D: Hapteno [cite: 162]"], correct: "B" },
+                { type: 'mc', q: "Qual classe de molécula é listada como a mais imunogênica (Proteínas > ...)?", options: ["A: Ácidos nucleicos [cite: 1]", "B: Lipídeos [cite: 1]", "C: Polissacarídeos [cite: 1]", "D: Proteínas [cite: 1]"], correct: "D" },
+                { type: 'mc', q: "Patógenos, microbiota, alimentos e antígenos ambientais são classificados como:", options: ["A: Antígenos estranhos [cite: 88, 89, 90, 91, 92]", "B: Autoantígenos [cite: 93]", "C: Epítopos lineares [cite: 27]", "D: Antígenos neoantigênicos [cite: 30]"], correct: "A" },
+                { type: 'mc', q: "A falha na tolerância a autoantígenos pode levar a:", options: ["A: Doenças autoimunes [cite: 133, 134]", "B: Imunidade passiva [cite: 360]", "C: Resposta inata [cite: 299]", "D: Uma resposta secundária mais forte [cite: 347]"], correct: "A" },
+                { type: 'mc', q: "Um determinante linear é reconhecido pela sua sequência de aminoácidos, independentemente da:", options: ["A: Carga elétrica", "B: Estrutura 3D (conformação) [cite: 138, 27, 43]", "C: Ligação ao TCR [cite: 98]", "D: Presença de adjuvante [cite: 159]"], correct: "B" },
+                { type: 'mc', q: "Por que os receptores da imunidade inata não são inclusos na definição clássica de Antígeno?", options: ["A: Porque eles não ligam substâncias", "B: Porque eles não são específicos como BCR e TCR [cite: 99]", "C: Porque eles induzem memória [cite: 299]", "D: Porque eles são solúveis"], correct: "B" }
             ],
             section4: [
-                { type: 'mc', q: "O principal lipídio estrutural das membranas biológicas é:", options: ["A: Ácidos graxos", "B: Triglicerídeos", "C: Fosfolipídios", "D: Esteroides"], correct: "C" },
-                { type: 'mc', q: "A beta-oxidação de ácidos graxos ocorre primariamente na:", options: ["A: mitocôndria", "B: citosol", "C: retículo endoplasmático", "D: núcleo"], correct: "A" },
-                { type: 'mc', q: "O transportador de ácidos graxos de cadeia longa para a mitocôndria é:", options: ["A: Albumina", "B: Carnitina", "C: Colesterol", "D: Lipoproteína"], correct: "B" },
-                { type: 'mc', q: "A Lipogênese (síntese de ácidos graxos) ocorre primariamente no:", options: ["A: músculo", "B: fígado", "C: cérebro", "D: rins"], correct: "B" },
-                { type: 'mc', q: "Os Corpos Cetônicos são produzidos em condições de:", options: ["A: jejum prolongado ou diabetes não controlado", "B: excesso de glicose", "C: hidratação máxima", "D: sono profundo"], correct: "A" },
-                { type: 'mc', q: "A lipogênese é estimulada por:", options: ["A: insulina", "B: glucagon", "C: epinefrina", "D: cortisol"], correct: "A" },
-                { type: 'mc', q: "Eicosanoides derivam de:", options: ["A: ácido araquidônico", "B: glicerol", "C: colesterol", "D: acetato"], correct: "A" },
-                { type: 'mc', q: "A síntese de ácidos graxos usa FAS I para:", options: ["A: alongamento cíclico de malonil-CoA", "B: beta-oxidação reversa", "C: hidrólise direta", "D: sem NADPH"], correct: "A" },
-                { type: 'mc', q: "Em aterosclerose, LDL oxidado ativa:", options: ["A: macrófagos via scavenger receptors, formando foam cells", "B: HDL protetor", "C: beta-oxidação hepática", "D: sem inflamação"], correct: "A" },
-                { type: 'mc', q: "Os esfingolipídios como esfingomielina são cruciais para:", options: ["A: domínios de sinalização em membranas", "B: armazenamento calórico", "C: hidrólise ácida", "D: transporte aquoso"], correct: "A" },
-                { type: 'mc', q: "A via de síntese de colesterol inicia com:", options: ["A: HMG-CoA redutase convertendo em mevalonato", "B: acetil-CoA direto", "C: squaleno hidrolisado", "D: sem regulação"], correct: "A" },
-                { type: 'mc', q: "Ácidos graxos ômega-3 reduzem risco cardiovascular por:", options: ["A: produção de eicosanoides anti-inflamatórios", "B: aumento de LDL", "C: rigidez de membrana", "D: armazenamento excessivo"], correct: "A" },
-                { type: 'mc', q: "As lipoproteínas VLDL transportam:", options: ["A: triglicerídeos endógenos do fígado para tecidos", "B: colesterol exógeno", "C: proteínas plasmáticas", "D: glicose ligada"], correct: "A" },
-                { type: 'mc', q: "A assimetria de fosfolipídios na membrana é mantida por:", options: ["A: Flipases e Floppases", "B: Enzimas hidrolíticas", "C: Oxidação", "D: Colesterol"], correct: "A" },
+                { type: 'mc', q: "Qual é a definição de Antigenicidade?", options: ["A: Habilidade de induzir resposta imune [cite: 140]", "B: Habilidade de se combinar com Anticorpos ou TCR [cite: 140]", "C: Habilidade de ativar T policlonalmente [cite: 167]", "D: Habilidade de precisar de um carreador [cite: 163]"], correct: "B" },
+                { type: 'mc', q: "Qual é a definição de Imunogenicidade?", options: ["A: Apenas a habilidade de se ligar a um anticorpo [cite: 140]", "B: Habilidade de ligar E induzir uma resposta imune [cite: 140]", "C: Ser um antígeno de baixo peso molecular [cite: 162]", "D: Ser um autoantígeno [cite: 93]"], correct: "B" },
+                { type: 'mc', q: "Complete a frase: 'Todos os imunógenos são antígenos, mas nem todos os antígenos são...'", options: ["A: Imunógenos [cite: 141]", "B: Epítopos [cite: 137]", "C: Proteínas [cite: 1]", "D: Autoantígenos [cite: 93]"], correct: "A" },
+                { type: 'mc', q: "Qual faixa de massa molecular (MM) é considerada ideal para bons imunógenos?", options: ["A: < 5.000 Da [cite: 148]", "B: ~ 100.000 Da [cite: 148]", "C: > 1.000.000 Da", "D: A MM não influencia a imunogenicidade [cite: 147]"], correct: "B" },
+                { type: 'mc', q: "Qual fator NÃO é listado como influenciador da imunogenicidade?", options: ["A: Genótipo do indivíduo [cite: 143]", "B: Dose e via de administração [cite: 144]", "C: Uso de Adjuvantes [cite: 145]", "D: Cor do antígeno"], correct: "D" },
+                { type: 'mc', q: "A administração de um antígeno pela via endovenosa (EV) tende a levá-lo para qual órgão, favorecendo a resposta celular?", options: ["A: Linfonodos [cite: 155]", "B: Baço [cite: 156]", "C: Placas de Peyer (via oral) [cite: 155, 157]", "D: Timo [cite: 413]"], correct: "B" },
+                { type: 'mc', q: "Adjuvantes são substâncias que aumentam a imunogenicidade. Qual NÃO é um efeito geral dos adjuvantes?", options: ["A: Prolongam a persistência do Ag [cite: 160]", "B: Aumentam a inflamação local [cite: 160]", "C: Aumentam moléculas coestimuladoras [cite: 160]", "D: Induzem tolerância específica (Treg)"], correct: "D" },
+                { type: 'mc', q: "Moléculas com < 5.000 a 10.000 Da são geralmente:", options: ["A: Pobres imunógenos [cite: 148]", "B: Excelentes imunógenos [cite: 148]", "C: Superantígenos [cite: 166]", "D: Adjuvantes [cite: 159]"], correct: "A" },
+                { type: 'mc', q: "Quanto maior a distância filogenética entre a fonte do Ag e o indivíduo, a imunogenicidade tende a ser:", options: ["A: Menor [cite: 152]", "B: Maior [cite: 151, 152]", "C: Irrelevante", "D: Dependente da dose apenas [cite: 153]"], correct: "B" },
+                { type: 'mc', q: "Doses muito altas de um antígeno podem levar à:", options: ["A: Tolerância [cite: 153]", "B: Uma resposta primária mais rápida", "C: Imunidade passiva [cite: 360]", "D: Formação de haptenos [cite: 161]"], correct: "A" }
             ],
-            section5: [ // 10 Questões Abertas (20 no total)
-                { type: 'open', q: "Explique o mecanismo da quimiosmose na síntese de ATP, incluindo o papel do gradiente protônico.", keywords: ["quimiosmose", "gradiente protônico", "ATP sintase", "prótons"] },
-                { type: 'open', q: "Descreva como a regulação alostérica da PFK-1 integra sinais energéticos na glicólise.", keywords: ["alostérica", "PFK-1", "ATP inibe", "AMP ativa", "frutose-2,6-bisfosfato"] },
-                { type: 'open', q: "Discuta o papel anfibólico do ciclo de Krebs na interconexão de vias metabólicas.", keywords: ["anfibólico", "TCA", "precursores", "biossíntese", "NADH", "FADH2"] },
-                { type: 'open', q: "Explique por que a beta-oxidação de ácidos graxos não pode fornecer net glicose em humanos.", keywords: ["beta-oxidação", "acetil-CoA", "piruvato carboxilase", "sem net glicose", "ciclo de Krebs"] },
-                { type: 'open', q: "Descreva o impacto de mutações em genes mitocondriais na fosforilação oxidativa.", keywords: ["mutações mitocondriais", "fosforilação oxidativa", "ATP reduzido", "neuropatias", "fadiga"] },
-                { type: 'open', q: "Explique o mecanismo de ação da insulina na lipogênese hepática.", keywords: ["insulina", "lipogênese", "ACC desfosforilada", "SREBP-1c", "malonil-CoA"] },
-                { type: 'open', q: "Discuta o efeito Warburg em células cancerosas e suas implicações terapêuticas.", keywords: ["Warburg", "glicólise aeróbica", "biossíntese", "inibidores glicolíticos", "proliferação"] },
-                { type: 'open', q: "Descreva a biossíntese de colesterol, destacando regulação por estatinas.", keywords: ["biossíntese colesterol", "HMG-CoA redutase", "estatinas inibem", "mevalonato", "feedback"] },
-                { type: 'open', q: "Explique a formação de domínios lipídicos (rafts) em membranas plasmáticas.", keywords: ["rafts", "domínios lipídicos", "colesterol", "esfingolipídios", "sinalização"] },
-                { type: 'open', q: "Discuta o papel dos eicosanoides na inflamação e como NSAIDs os modulam.", keywords: ["eicosanoides", "inflamação", "prostaglandinas", "NSAIDs inibem COX", "leucotrienos"] }
+            section5: [
+                { type: 'mc', q: "Haptenos são antígenos de baixo peso molecular que:", options: ["A: São altamente imunogênicos sozinhos [cite: 162]", "B: Não são imunogênicos sozinhos, mas se tornam ao ligar-se a um carreador [cite: 162, 163]", "C: Ativam células T policlonalmente [cite: 167]", "D: São sempre proteínas [cite: 164]"], correct: "B" },
+                { type: 'mc', q: "Superantígenos (como toxinas de Staphylococcus) ativam inespecificamente:", options: ["A: Uma grande fração de clones de células T (até 25%) [cite: 167]", "B: Apenas células B (resposta humoral) [cite: 167]", "C: Apenas receptores da imunidade inata [cite: 99]", "D: Células NK e macrófagos apenas [cite: 403, 380]"], correct: "A" },
+                { type: 'mc', q: "A estrutura básica de todos os anticorpos consiste em:", options: ["A: 2 cadeias pesadas e 2 cadeias leves [cite: 177]", "B: 1 cadeia pesada e 1 cadeia leve", "C: Apenas cadeias leves (Kappa ou Lambda) [cite: 178]", "D: Apenas cadeias pesadas (Alfa, Mi, Gama, etc) [cite: 178]"], correct: "A" },
+                { type: 'mc', q: "Qual classe de anticorpo é um pentâmero na forma secretada e tem alta AVIDEZ inicial?", options: ["A: IgG [cite: 187]", "B: IgA (dímero) [cite: 187]", "C: IgE [cite: 187]", "D: IgM [cite: 187, 190]"], correct: "D" },
+                { type: 'mc', q: "A porção (fragmento) do anticorpo responsável pela ligação ao antígeno é a:", options: ["A: Região Fc (constante) [cite: 181]", "B: Região Fab (variável) [cite: 180, 182]", "C: Cadeia J", "D: Peça caudal [cite: 174]"], correct: "B" },
+                { type: 'mc', q: "A porção (fragmento) Fc é responsável por quais funções efetoras?", options: ["A: Apenas ligação ao antígeno [cite: 180]", "B: Ativação do complemento e ligação a receptores em fagócitos (Opsonização) [cite: 187, 192]", "C: Apenas neutralização [cite: 192]", "D: Ser um determinante conformacional [cite: 138]"], correct: "B" },
+                { type: 'mc', q: "Qual isotipo de anticorpo é crucial para a imunidade de mucosas?", options: ["A: IgA [cite: 187, 195]", "B: IgD [cite: 187]", "C: IgE [cite: 187]", "D: IgG [cite: 187]"], correct: "A" },
+                { type: 'mc', q: "Qual isotipo está envolvido na defesa contra parasitas helmínticos e reações de hipersensibilidade (alergia)?", options: ["A: IgA [cite: 187]", "B: IgD [cite: 187]", "C: IgE [cite: 187, 202]", "D: IgM [cite: 187]"], correct: "C" },
+                { type: 'mc', q: "O mecanismo ADCC (Citotoxicidade celular dependente de anticorpo) envolve qual célula e receptor?", options: ["A: Célula NK ligando-se à porção Fc da IgG via receptor CD16 (FcγRIII) [cite: 187, 196, 197, 198]", "B: Macrófago ativando complemento [cite: 192]", "C: Linfócito T CD8+ e TCR [cite: 398]", "D: Basófilo e IgE [cite: 408, 187]"], correct: "A" },
+                { type: 'mc', q: "A força de ligação de um *único* sítio Fab a um epítopo é chamada de:", options: ["A: Avidez [cite: 188, 211]", "B: Afinidade [cite: 188, 211]", "C: Imunogenicidade [cite: 140]", "D: Antigenicidade [cite: 140]"], correct: "B" }
+            ],
+            section6: [ // 20 Questões Abertas
+                { type: 'open', q: "Explique as 4 funções principais do Sistema Imune listadas no slide 3.", keywords: ["resistência infecções", "tolerância", "rejeição transplantes", "controle tumores"] },
+                { type: 'open', q: "Descreva as diferenças fundamentais entre imunidade inata e adaptativa (tempo, especificidade, memória).", keywords: ["inata constitutiva imediata", "adaptativa específica memória", "lenta", "expansão clonal"] },
+                { type: 'open', q: "Diferencie imunidade ativa (natural e artificial) de imunidade passiva (natural e artificial).", keywords: ["ativa infecção imunização", "passiva gestação soros", "memória", "sem memória"] },
+                { type: 'open', q: "Diferencie imunidade humoral de imunidade celular, citando as principais células envolvidas.", keywords: ["humoral B anticorpos", "celular T cooperação", "extracelular", "intracelular"] },
+                { type: 'open', q: "Cite os dois órgãos linfoides primários e explique a função de cada um na maturação dos linfócitos.", keywords: ["medula óssea B", "timo T", "maturação", "geradores"] },
+                { type: 'open', q: "Cite dois órgãos linfoides secundários e explique como eles filtram antígenos.", keywords: ["linfonodos linfa", "baço sangue", "secundários", "periféricos", "polpa branca"] },
+                { type: 'open', q: "Qual o papel das Células Dendríticas (APCs) na ligação da imunidade inata com a adaptativa?", keywords: ["dendríticas", "apc", "apresentação", "linfócitos T", "MHC", "coestimuladores"] },
+                { type: 'open', q: "Descreva as funções dos três principais granulócitos: neutrófilos, eosinófilos e basófilos.", keywords: ["neutrófilos fagocitose bactérias", "eosinófilos parasitas alergia", "basófilos alergia histamina"] },
+                { type: 'open', q: "Defina Antígeno (Ag) e Epítopo (Determinante Antigênico).", keywords: ["antígeno BCR TCR", "epítopo região específica", "determinante", "ligação"] },
+                { type: 'open', q: "Diferencie epítopos lineares de epítopos conformacionais.", keywords: ["linear sequência", "conformacional 3D desnaturação", "nativa", "determinante"] },
+                { type: 'open', q: "Explique a diferença crucial entre antigenicidade e imunogenicidade.", keywords: ["antigenicidade ligação", "imunogenicidade induz resposta", "todos imunógenos", "nem todo antígeno"] },
+                { type: 'open', q: "Cite 3 fatores que influenciam a imunogenicidade de uma molécula.", keywords: ["massa molecular", "complexidade", "distância filogenética", "dose", "via", "adjuvantes"] },
+                { type: 'open', q: "Explique o que são Haptenos e como eles podem se tornar imunogênicos.", keywords: ["haptenos baixo peso", "não imunogênico", "carreador proteína", "conjugado", "níquel"] },
+                { type: 'open', q: "O que são Superantígenos e por que eles causam uma ativação imune tão massiva?", keywords: ["superantígenos policlonal", "25% T", "fora sulco MHC", "toxina estafilocócica"] },
+                { type: 'open', q: "Descreva a estrutura básica de um anticorpo, identificando as regiões Fab e Fc.", keywords: ["2 leves 2 pesadas", "fab variável", "antígeno", "fc constante", "efetoras"] },
+                { type: 'open', q: "Cite as 5 classes (isotipos) de anticorpos e a função principal da IgA e da IgG.", keywords: ["IgA mucosa", "IgG opsonização neonatal complemento", "IgM", "IgE", "IgD"] },
+                { type: 'open', q: "Explique a diferença entre Afinidade e Avidez, usando o IgM como exemplo de alta avidez.", keywords: ["afinidade um sítio", "avidez múltiplos sítios", "força total", "IgM pentâmero"] },
+                { type: 'open', q: "Descreva 3 mecanismos de ação dos anticorpos (ex: neutralização, opsonização, ADCC, complemento).", keywords: ["neutralização", "opsonização fagocitose", "ADCC NK", "complemento lise"] },
+                { type: 'open', q: "Explique o mecanismo de ADCC (Citotoxicidade celular dependente de anticorpo).", keywords: ["ADCC", "NK", "CD16", "FcγRIII", "IgG", "lise", "grânulos"] },
+                { type: 'open', q: "Anticorpos podem causar doenças? Cite um exemplo (ex: alergia, autoimunidade).", keywords: ["alergia IgE", "autoimunes IgG", "rejeição", "MIS-C"] }
             ]
         };
 
         // Função para gerar perguntas aleatórias (suporte a MC e open)
         function generateQuestions(sectionId, pool) {
-            const numToGenerate = sectionId === 'section5' ? pool.length : 5; // 5 MC ou todas as abertas (10)
+            // Pega 5 aleatórias para seções 1-5, ou todas (pool.length) para a seção 6
+            const numToGenerate = sectionId === 'section6' ? pool.length : 5;
             const shuffled = shuffle([...pool]).slice(0, numToGenerate);
             const container = document.getElementById(`questions${sectionId.slice(-1)}`);
-            
+
             shuffled.forEach((item, index) => {
                 const qDiv = document.createElement('div');
-                qDiv.className = 'question';
+                qDiv.classList.add('question');
                 qDiv.dataset.type = item.type;
-                qDiv.dataset.correct = item.correct;
-                if (item.keywords) {
-                    qDiv.dataset.keywords = item.keywords.join(',');
-                }
 
                 const p = document.createElement('p');
                 p.textContent = `${index + 1}. ${item.q}`;
                 qDiv.appendChild(p);
 
                 if (item.type === 'mc') {
+                    qDiv.dataset.correct = item.correct;
                     const optionsDiv = document.createElement('div');
-                    optionsDiv.className = 'options';
-                    item.options.forEach(option => {
-                        const button = document.createElement('button');
-                        button.className = 'option';
-                        button.textContent = option;
-                        button.dataset.value = option.charAt(0);
-                        optionsDiv.appendChild(button);
+                    optionsDiv.classList.add('options');
+                    item.options.forEach(opt => {
+                        // Extrai o valor (ex: "A") e o texto (ex: "Opção A")
+                        const value = opt.substring(0, opt.indexOf(':')); 
+                        const btn = document.createElement('button');
+                        btn.classList.add('option');
+                        btn.dataset.value = value;
+                        btn.textContent = opt;
+                        optionsDiv.appendChild(btn);
                     });
                     qDiv.appendChild(optionsDiv);
                 } else { // open
+                    qDiv.dataset.keywords = item.keywords.join(',');
                     const textarea = document.createElement('textarea');
-                    textarea.className = 'open-answer';
+                    textarea.classList.add('open-answer');
                     textarea.placeholder = 'Digite sua resposta detalhada aqui...';
                     qDiv.appendChild(textarea);
                 }
@@ -289,6 +298,7 @@
             generateQuestions('section3', questionPools.section3);
             generateQuestions('section4', questionPools.section4);
             generateQuestions('section5', questionPools.section5);
+            generateQuestions('section6', questionPools.section6);
 
             // Adicionar event listeners para seleção (MC)
             document.addEventListener('click', function(e) {
@@ -300,30 +310,33 @@
             });
         });
 
+        // Função para verificar respostas (lógica do modelo fornecido)
         function checkAnswers(sectionId) {
-            const questionsContainer = document.getElementById(`questions${sectionId.slice(-1)}`);
-            const questions = questionsContainer.querySelectorAll('.question');
+            const section = document.getElementById(sectionId);
+            const questions = section.querySelectorAll('.question');
             let correctCount = 0;
-            const totalQuestions = questions.length;
-            const errors = [];
+            let totalQuestions = 0;
+            let errors = [];
 
-            questions.forEach(q => {
-                const type = q.dataset.type;
-                if (type === 'mc') {
-                    const selectedOption = q.querySelector('.option.selected');
-                    const correctValue = q.dataset.correct;
-                    if (selectedOption && selectedOption.dataset.value === correctValue) {
+            questions.forEach((q, index) => {
+                totalQuestions++;
+                if (q.dataset.type === 'mc') {
+                    const selected = q.querySelector('.option.selected');
+                    const correct = q.dataset.correct;
+                    if (selected && selected.dataset.value === correct) {
                         correctCount++;
                     } else {
                         const questionText = q.querySelector('p').textContent;
-                        errors.push(`${questionText} - Resposta correta: ${correctValue}`);
+                        const selectedValue = selected ? selected.textContent : 'Nenhuma selecionada';
+                        const correctOptionElement = Array.from(q.querySelectorAll('.option')).find(opt => opt.dataset.value === correct);
+                        const correctText = correctOptionElement ? correctOptionElement.textContent : 'N/A';
+                        errors.push(`${questionText} - Sua resposta: ${selectedValue} (Errada). Correta: ${correctText}`);
                     }
                 } else { // open
                     const answer = q.querySelector('.open-answer').value.toLowerCase().trim();
                     const keywords = q.dataset.keywords.split(',').map(k => k.toLowerCase().trim());
+                    // Critério de correção parcial: pelo menos 2 keywords
                     const matches = keywords.filter(kw => answer.includes(kw)).length;
-                    
-                    // Critério de correção parcial: pelo menos 2 keywords para "correto"
                     if (matches >= 2) { 
                         correctCount++;
                     } else {
